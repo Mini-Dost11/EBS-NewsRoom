@@ -439,7 +439,7 @@ input:not([type]) {
   margin: 12px 0;
   padding: 14px;
   border-left: 4px solid var(--blue);
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--surface-alt);
 }
 
@@ -451,6 +451,11 @@ input:not([type]) {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
+}
+
+
+.script-block p {
+  line-height: 1.5;
 }
 
 .script-block p,
@@ -1116,7 +1121,7 @@ input:not([type]):focus {
 
 .script-block {
   border-left-width: 3px;
-  border-radius: 8px;
+  border-radius: 0;
   background: #f8fafc;
 }
 
@@ -1182,4 +1187,6 @@ input:not([type]):focus {
     align-items: start;
   }
 }
-
+.script-block {
+  border-radius: 0;
+}
