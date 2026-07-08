@@ -1,0 +1,10 @@
+{
+  "name": "ebs-newsroom-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EBS 뉴스 보도정보시스템 운영 화면 프로토타입",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 5173"
+  }
+}
