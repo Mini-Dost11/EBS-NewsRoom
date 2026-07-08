@@ -67,7 +67,7 @@ function renderShell() {
       <header class="topbar">
         <div>
           <p class="eyebrow">통합 뉴스 보도정보시스템</p>
-          <h1>오늘 제작 흐름을 한 화면에서 관리합니다</h1>
+          <h1>대시보드</h1>
         </div>
         <div class="top-actions">
           <button class="ghost-button" type="button">연합뉴스 동기화</button>
