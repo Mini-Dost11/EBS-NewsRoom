@@ -1,4 +1,10 @@
-const navItems = ["대시보드", "기사 작성", "런다운", "큐시트", "아카이브"];
+const navItems = [
+  { id: "dashboard", label: "대시보드" },
+  { id: "editor", label: "기사 작성" },
+  { id: "rundown", label: "런다운" },
+  { id: "cue", label: "큐시트" },
+  { id: "archive", label: "아카이브" }
+];
 
 const wireStatus = [
   { source: "연합뉴스", title: "교육부, 디지털 교과서 현장 의견 수렴", time: "10:18", tag: "교육", state: "아이템 후보" },
@@ -35,7 +41,22 @@ const suggestions = [
   "자막 후보: '디지털 교과서 현장 점검', '교사 연수 확대 필요'"
 ];
 
+const storyQueue = [
+  { title: "교육부 디지털 교과서 현장 점검", reporter: "김민지", status: "검토요청", due: "11:20" },
+  { title: "고교학점제 운영 학교 확대", reporter: "이준호", status: "작성중", due: "11:40" },
+  { title: "수능 모의평가 접수 시작", reporter: "최윤아", status: "승인", due: "12:00" },
+  { title: "청소년 미디어 이용 변화", reporter: "박서연", status: "수정요청", due: "12:15" }
+];
+
+const rundownNotes = [
+  { label: "프롬프터", value: "v10 동기화", tone: "green", progress: 88 },
+  { label: "자막 패키지", value: "2건 대기", tone: "amber", progress: 68 },
+  { label: "영상 최종본", value: "1건 누락", tone: "red", progress: 42 },
+  { label: "송출 서버", value: "STUDIO-SRV-01 정상", tone: "blue", progress: 90 }
+];
+
 const app = document.querySelector("#app");
+let currentPage = "dashboard";
 
 function badge(text, tone = "neutral") {
   return `<span class="badge badge-${tone}">${text}</span>`;
@@ -53,7 +74,7 @@ function renderShell() {
         <strong>Newsroom</strong>
       </div>
       <nav>
-        ${navItems.map((item, index) => `<button class="nav-item ${index === 0 ? "active" : ""}" type="button">${item}</button>`).join("")}
+        ${navItems.map((item) => `<button class="nav-item ${item.id === currentPage ? "active" : ""}" type="button" data-page="${item.id}">${item.label}</button>`).join("")}
       </nav>
       <section class="onair-panel">
         <span>오늘 방송</span>
@@ -66,37 +87,77 @@ function renderShell() {
     <main class="workspace">
       <header class="topbar">
         <div>
-          <p class="eyebrow">통합 뉴스 보도정보시스템</p>
-          <h1>대시보드</h1>
+          <p class="eyebrow">${getPageMeta().eyebrow}</p>
+          <h1>${getPageMeta().title}</h1>
         </div>
-        <div class="top-actions">
-          <button class="ghost-button" type="button">연합뉴스 동기화</button>
-          <button class="primary-button" type="button">새 아이템 등록</button>
-        </div>
+        <div class="top-actions">${getPageMeta().actions}</div>
       </header>
-
-      <section class="status-strip" aria-label="제작 상태 요약">
-        ${production.map((item) => `
-          <article class="metric">
-            <span class="metric-label">${item.label}</span>
-            <strong>${item.value}</strong>
-            ${progress(Math.min(item.value * 10, 100), item.tone)}
-          </article>
-        `).join("")}
-      </section>
-
-      <section class="dashboard-layout" id="dashboard">
-        ${renderDashboard()}
-      </section>
-
-      <section class="section-grid two-column" id="editor">
-        ${renderEditor()}
-      </section>
-
-      <section class="section-grid rundown-section" id="rundown">
-        ${renderRundown()}
-      </section>
+      ${renderCurrentPage()}
     </main>
+  `;
+
+  document.querySelectorAll(".nav-item").forEach((button) => {
+    button.addEventListener("click", () => {
+      currentPage = button.dataset.page;
+      renderShell();
+    });
+  });
+}
+
+function getPageMeta() {
+  const meta = {
+    dashboard: {
+      eyebrow: "통합 뉴스 보도정보시스템",
+      title: "대시보드",
+      actions: `<button class="ghost-button" type="button">연합뉴스 동기화</button><button class="primary-button" type="button">새 아이템 등록</button>`
+    },
+    editor: {
+      eyebrow: "기사 작성·승인",
+      title: "기사 작성",
+      actions: `<button class="ghost-button" type="button">임시저장</button><button class="primary-button" type="button">데스크 검토 요청</button>`
+    },
+    rundown: {
+      eyebrow: "런다운·큐시트·송출 연계",
+      title: "런다운",
+      actions: `<button class="ghost-button" type="button">큐시트 출력</button><button class="primary-button" type="button">송출 패키지 전송</button>`
+    },
+    cue: {
+      eyebrow: "큐시트",
+      title: "큐시트",
+      actions: `<button class="ghost-button" type="button">PDF 내보내기</button><button class="primary-button" type="button">제작팀 공유</button>`
+    },
+    archive: {
+      eyebrow: "아카이브",
+      title: "아카이브",
+      actions: `<button class="ghost-button" type="button">검색 조건 저장</button><button class="primary-button" type="button">메타데이터 등록</button>`
+    }
+  };
+  return meta[currentPage] || meta.dashboard;
+}
+
+function renderCurrentPage() {
+  if (currentPage === "editor") return renderEditorPage();
+  if (currentPage === "rundown") return renderRundownPage();
+  if (currentPage === "cue") return renderPlaceholderPage("큐시트", "런다운 정보를 기준으로 회차별 큐시트, 스튜디오 지시, 프롬프터 출력물을 확인하는 화면입니다.");
+  if (currentPage === "archive") return renderPlaceholderPage("아카이브", "송출 완료 기사, 영상 클립, 자막/CG, 외부 자료 사용 이력을 검색하고 보존하는 화면입니다.");
+  return renderDashboardPage();
+}
+
+function renderDashboardPage() {
+  return `
+    <section class="status-strip" aria-label="제작 상태 요약">
+      ${production.map((item) => `
+        <article class="metric">
+          <span class="metric-label">${item.label}</span>
+          <strong>${item.value}</strong>
+          ${progress(Math.min(item.value * 10, 100), item.tone)}
+        </article>
+      `).join("")}
+    </section>
+
+    <section class="dashboard-layout" id="dashboard">
+      ${renderDashboard()}
+    </section>
   `;
 }
 
@@ -114,7 +175,7 @@ function renderDashboard() {
         ${wireStatus.map((item) => `
           <button class="wire-item" type="button">
             <span class="wire-meta">${item.source} · ${item.time} · ${item.tag}</span>
-            <strong>${item.title}</strong>
+            <span class="news-title">${item.title}</span>
             <em>${item.state}</em>
           </button>
         `).join("")}
@@ -133,7 +194,7 @@ function renderDashboard() {
         ${rundown.slice(0, 4).map((item) => `
           <div class="table-row">
             <span class="order">${item.order}</span>
-            <strong>${item.title}</strong>
+            <span class="news-title">${item.title}</span>
             <span>${item.length}</span>
           </div>
         `).join("")}
@@ -158,56 +219,165 @@ function renderDashboard() {
   `;
 }
 
-function renderEditor() {
+function renderEditorPage() {
   return `
-    <article class="panel script-panel">
-      <div class="panel-heading">
-        <div>
-          <h2>기사 작성·승인</h2>
-          <p>구조화된 방송 원고와 데스크 체크</p>
+    <section class="editor-workspace" id="editor">
+      <aside class="panel story-list-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>기사 목록</h2>
+            <p>오늘 방송 아이템과 승인 흐름</p>
+          </div>
+          ${badge("4건", "neutral")}
         </div>
-        ${badge("검토요청", "amber")}
-      </div>
-      <div class="story-meta">
-        <label>제목 <input value="교육부 디지털 교과서 현장 점검" /></label>
-        <label>담당 <input value="김민지 기자 / 이정훈 데스크" /></label>
-      </div>
-      <div class="script-block">
-        <span>앵커멘트</span>
-        <p>디지털 교과서 도입을 앞두고 학교 현장의 준비 상황을 점검하는 움직임이 이어지고 있습니다.</p>
-      </div>
-      <div class="script-block">
-        <span>리포트</span>
-        <p>교사 연수와 기기 보급 상황은 지역별로 차이를 보이고 있습니다. 교육부는 오늘 시범학교 의견을 수렴해 보완 대책을 마련하겠다고 밝혔습니다.</p>
-      </div>
-      <div class="inline-fields">
-        <label>자막 <input value="디지털 교과서 현장 점검" /></label>
-        <label>영상 <input value="NPS://EDU/20260708/clip_014" /></label>
-      </div>
-    </article>
+        <div class="story-list">
+          ${storyQueue.map((item, index) => `
+            <button class="story-row ${index === 0 ? "selected" : ""}" type="button">
+              <span class="news-title">${item.title}</span>
+              <span>${item.reporter} · 마감 ${item.due}</span>
+              ${statusBadge(item.status)}
+            </button>
+          `).join("")}
+        </div>
+      </aside>
 
-    <aside class="panel assist-panel">
-      <div class="panel-heading">
-        <div>
-          <h2>연결 자료·AI 보조</h2>
-          <p>원문, 승인 조건, 문체 제안</p>
+      <article class="panel script-panel editor-main">
+        <div class="panel-heading">
+          <div>
+            <h2>방송 원고 편집</h2>
+            <p>앵커, 리포트, 자막, 영상 지점을 구조화해 관리</p>
+          </div>
+          ${badge("검토요청", "amber")}
         </div>
-      </div>
-      <section class="source-box">
-        <span>연합뉴스 원문</span>
-        <strong>교육부, 디지털 교과서 시범학교 의견 수렴</strong>
-        <p>송고 10:18 · 기사 ID YNA-20260708-EDU-041</p>
-      </section>
-      <ul class="check-list">
-        <li><input type="checkbox" checked /> 출처 및 사용 범위 확인</li>
-        <li><input type="checkbox" checked /> 반론·기관명 표기 확인</li>
-        <li><input type="checkbox" /> 자막 문구 최종 확인</li>
-        <li><input type="checkbox" /> 영상 버전 최종본 확인</li>
-      </ul>
-      <div class="suggestions">
-        ${suggestions.map((item) => `<button type="button">${item}</button>`).join("")}
-      </div>
-    </aside>
+        <div class="story-meta">
+          <label>제목 <input value="교육부 디지털 교과서 현장 점검" /></label>
+          <label>담당 <input value="김민지 기자 / 이정훈 데스크" /></label>
+        </div>
+        <div class="script-toolbar" aria-label="원고 도구">
+          <button type="button">앵커</button>
+          <button type="button">리포트</button>
+          <button type="button">자막</button>
+          <button type="button">CG</button>
+          <button type="button">영상</button>
+        </div>
+        <div class="script-block anchor">
+          <span>앵커멘트</span>
+          <p contenteditable="true">디지털 교과서 도입을 앞두고 학교 현장의 준비 상황을 점검하는 움직임이 이어지고 있습니다.</p>
+        </div>
+        <div class="script-block">
+          <span>리포트</span>
+          <p contenteditable="true">교사 연수와 기기 보급 상황은 지역별로 차이를 보이고 있습니다. 교육부는 오늘 시범학교 의견을 수렴해 보완 대책을 마련하겠다고 밝혔습니다.</p>
+        </div>
+        <div class="cue-grid">
+          <label>자막 1 <input value="디지털 교과서 현장 점검" /></label>
+          <label>자막 2 <input value="교사 연수·기기 보급 지역별 차이" /></label>
+          <label>CG 요청 <input value="시범학교 의견 수렴 일정 그래픽" /></label>
+          <label>영상 연결 <input value="NPS://EDU/20260708/clip_014" /></label>
+        </div>
+      </article>
+
+      <aside class="editor-side">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>연합뉴스 원문</h2>
+              <p>출처, 기사 ID, 활용 이력</p>
+            </div>
+          </div>
+          <section class="source-box">
+            <span>송고 10:18 · YNA-20260708-EDU-041</span>
+            <span class="news-title">교육부, 디지털 교과서 시범학교 의견 수렴</span>
+            <p>내부 아이템 후보 등록, 원문 참고 연결, 저작권 메모 필요</p>
+          </section>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>데스크 체크</h2>
+              <p>승인 전 필수 확인</p>
+            </div>
+          </div>
+          <ul class="check-list">
+            <li><input type="checkbox" checked /> 출처 및 사용 범위 확인</li>
+            <li><input type="checkbox" checked /> 기관명·수치 표현 확인</li>
+            <li><input type="checkbox" /> 자막 문구 최종 확인</li>
+            <li><input type="checkbox" /> 영상 최종본 버전 확인</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>AI 보조 제안</h2>
+              <p>기자가 선택 반영</p>
+            </div>
+          </div>
+          <div class="suggestions">
+            ${suggestions.map((item) => `<button type="button">${item}</button>`).join("")}
+          </div>
+        </section>
+      </aside>
+    </section>
+  `;
+}
+
+function renderRundownPage() {
+  return `
+    <section class="status-strip compact-status" aria-label="런다운 상태 요약">
+      ${rundownNotes.map((item) => `
+        <article class="metric">
+          <span class="metric-label">${item.label}</span>
+          <strong class="metric-text">${item.value}</strong>
+          ${progress(item.progress, item.tone)}
+        </article>
+      `).join("")}
+    </section>
+
+    <section class="section-grid rundown-section" id="rundown">
+      ${renderRundown()}
+    </section>
+
+    <section class="section-grid rundown-ops">
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>큐시트 상세</h2>
+            <p>스튜디오, 프롬프터, 자막 담당자 공유 항목</p>
+          </div>
+          ${badge("v12", "neutral")}
+        </div>
+        <div class="cue-sheet">
+          ${rundown.map((item) => `
+            <div class="cue-card">
+              <span class="order">${item.order}</span>
+              <span class="news-title">${item.title}</span>
+              <p>IN 19:${String(Number(item.order) + 2).padStart(2, "0")}:00 · ${item.length} · ${item.reporter}</p>
+              <div>
+                ${statusBadge(`원고 ${item.script}`)}
+                ${statusBadge(`영상 ${item.video}`)}
+                ${statusBadge(`자막 ${item.cg}`)}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </article>
+
+      <aside class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>송출 연계 로그</h2>
+            <p>최근 패키지 전송 상태</p>
+          </div>
+        </div>
+        <ol class="handoff-log">
+          <li><strong>10:22</strong><span>STUDIO-SRV-01 큐시트 v12 동기화</span></li>
+          <li><strong>10:20</strong><span>프롬프터 v10 재생성</span></li>
+          <li><strong>10:17</strong><span>자막 패키지 v8 생성, 2건 대기</span></li>
+          <li><strong>10:12</strong><span>NPS 영상 최종본 매칭 확인</span></li>
+        </ol>
+      </aside>
+    </section>
   `;
 }
 
@@ -232,7 +402,7 @@ function renderRundown() {
         ${rundown.map((item) => `
           <div class="rundown-row" role="row">
             <span class="order">${item.order}</span>
-            <strong>${item.title}</strong>
+            <span class="news-title">${item.title}</span>
             <span>${item.reporter}</span>
             <span>${item.length}</span>
             <span>${statusBadge(item.script)}</span>
@@ -269,6 +439,16 @@ function renderRundown() {
   `;
 }
 
+function renderPlaceholderPage(title, description) {
+  return `
+    <section class="panel placeholder-panel">
+      <h2>${title}</h2>
+      <p>${description}</p>
+      <p>현재 프로토타입에서는 대시보드, 기사 작성, 런다운 화면을 우선 구현했습니다.</p>
+    </section>
+  `;
+}
+
 function statusBadge(value) {
   const toneMap = {
     "승인": "green",
@@ -276,11 +456,22 @@ function statusBadge(value) {
     "완료": "green",
     "동기화": "green",
     "검토": "amber",
+    "검토요청": "amber",
     "편집중": "amber",
     "가편": "amber",
     "요청": "violet",
     "대기": "neutral",
-    "없음": "red"
+    "없음": "red",
+    "작성중": "blue",
+    "수정요청": "red",
+    "원고 승인": "green",
+    "원고 검토": "amber",
+    "영상 최종": "green",
+    "영상 편집중": "amber",
+    "영상 가편": "amber",
+    "영상 없음": "red",
+    "자막 완료": "green",
+    "자막 요청": "violet"
   };
   return badge(value, toneMap[value] || "neutral");
 }
