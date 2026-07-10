@@ -26,6 +26,61 @@ const wireItems = [
   { id: "YNA-20260708-REG-022", title: "대전·충남 통합 논의 속도…교육감들 교육자치 존중해야", category: "지역", priority: "보통", urgent: false, received: "09:31", status: "모니터링", duplicate: "없음", linked: "-" }
 ];
 
+const wireArticleDetails = {
+  "YNA-20260708-EDU-041": {
+    source: "연합뉴스 Open API",
+    updatedAt: "2026.07.08 10:18",
+    reporter: "연합뉴스 정책팀",
+    summary: "정개특위 가동과 함께 교육감 선거, 교육자치, 지역 교육 공약이 정치권 논의 테이블에 다시 오를 수 있다는 전망을 전합니다.",
+    lead: "국회 정치개혁특별위원회가 본격 가동되면서 지방선거와 맞물린 교육 현안 논의 가능성이 다시 주목받고 있습니다.",
+    body: [
+      "정치권은 정개특위 논의 범위를 선거 제도 전반으로 확장할 수 있다는 입장인 반면, 교육계는 교육감 선거와 교육자치 문제까지 논의가 번질지 예의주시하고 있습니다.",
+      "시도교육감협의회 안팎에서는 교육감 선거 방식과 교육 공약 검증 체계를 함께 손봐야 한다는 의견이 나왔고, 일부에서는 고교학점제와 지역대학 지원 같은 정책 현안도 선거 국면과 연결될 수 있다고 보고 있습니다.",
+      "전문가들은 정개특위 논의가 본격화되면 정치 일정과 별개로 교육 현안의 독립성과 지속성을 어떻게 보장할지에 대한 사회적 합의가 필요하다고 지적했습니다."
+    ],
+    tags: ["정개특위", "교육현안", "지방선거", "교육감선거"]
+  },
+  "YNA-20260708-SOC-117": {
+    source: "연합뉴스 Open API",
+    updatedAt: "2026.07.08 10:02",
+    reporter: "연합뉴스 사회부",
+    summary: "공공의대 설립 방향이 의학전문대학원 형태와 장기 의무복무 조건을 중심으로 검토되고 있다는 내용입니다.",
+    lead: "정부와 여당이 공공의대 설립 방안을 의학전문대학원 형태를 포함해 다시 검토하고 있습니다.",
+    body: [
+      "검토안에는 공공의대 졸업생에게 최대 15년의 지역 의무복무를 부여하는 방안이 담긴 것으로 전해졌습니다.",
+      "의료 취약지 인력 확충이 핵심 목적이지만, 교육계와 의료계에서는 양성 체계와 수련 환경, 지역 정착 지원이 함께 논의돼야 한다는 목소리가 나옵니다.",
+      "정부는 의료인력 수급 추계와 지역 의료 공백 현황을 토대로 세부안을 마련한다는 계획입니다."
+    ],
+    tags: ["공공의대", "의전원", "의무복무", "의료인력"]
+  },
+  "YNA-20260708-SCH-073": {
+    source: "연합뉴스 Open API",
+    updatedAt: "2026.07.08 09:47",
+    reporter: "연합뉴스 교육팀",
+    summary: "학폭 이력이 수시전형에 미치는 영향이 커지며 현장 혼란과 법적 분쟁 우려가 함께 커지고 있다는 기사입니다.",
+    lead: "학교폭력 이력이 대입 수시전형 당락에 직접 영향을 주면서 학교 현장과 수험생 사이의 긴장감이 커지고 있습니다.",
+    body: [
+      "일부 국립대에서는 학생부 정성평가 과정에서 학폭 기록이 감점 또는 탈락 사유로 반영되며 수시 합격선에도 영향을 주고 있습니다.",
+      "교육 현장에서는 제도 취지에 공감하면서도 반성 정도와 재발 방지 노력까지 평가에 어떻게 반영할지 기준을 더 세밀하게 마련해야 한다는 지적이 나옵니다.",
+      "입시 전문가들은 학폭 기록 관련 소송 가능성이 커질수록 대학별 설명 책임과 평가 기준 공개 수준도 함께 높아져야 한다고 보고 있습니다."
+    ],
+    tags: ["학폭", "수시", "국립대", "학생부"]
+  },
+  "YNA-20260708-REG-022": {
+    source: "연합뉴스 Open API",
+    updatedAt: "2026.07.08 09:31",
+    reporter: "연합뉴스 지역부",
+    summary: "대전·충남 통합 논의 속에서 교육감들이 교육자치 원칙 훼손 우려를 제기하고 있다는 내용입니다.",
+    lead: "대전·충남 행정 통합 논의가 속도를 내는 가운데 교육감들은 교육자치의 독립성을 훼손해서는 안 된다고 강조했습니다.",
+    body: [
+      "통합 논의가 지방행정 효율성에 초점을 맞추고 있지만 교육행정까지 일괄적으로 재편할 경우 지역 교육 수요가 충분히 반영되지 못할 수 있다는 우려가 제기됩니다.",
+      "교육감들은 교육예산과 학교 지원 체계, 지역 특성화 정책은 별도 검토가 필요하다는 입장을 밝히고 있습니다.",
+      "향후 지방의회와 교육계 협의 과정에서 교육자치 보장 장치가 핵심 쟁점으로 떠오를 전망입니다."
+    ],
+    tags: ["대전충남통합", "교육자치", "교육감", "지역교육"]
+  }
+};
+
 const scheduleItems = [
   { time: "09:30", title: "교육부 브리핑 사전 질문 정리", owner: "김민지", place: "세종", status: "취재중" },
   { time: "10:40", title: "경기교육청 대입 협의체 제안 인터뷰", owner: "송성환", place: "수원", status: "촬영배정" },
@@ -60,6 +115,26 @@ const archiveItems = [
 
 const app = document.querySelector("#app");
 let currentPage = "dashboard";
+let selectedStoryId = stories[0].id;
+let selectedWireId = wireItems[0].id;
+const editorDrafts = Object.fromEntries(stories.map((story) => [story.id, createDraft(story)]));
+
+function createDraft(story) {
+  return {
+    title: story.title,
+    assignee: `${story.reporter} 기자 / ${story.desk} 데스크`,
+    wireId: story.wireId !== "-" ? story.wireId : "",
+    anchor: "지방선거를 앞두고 국회 정치개혁특별위원회가 가동되면서 교육 현안 논의 가능성에도 관심이 쏠립니다.",
+    lead: "교육감 선거 제도와 지역 교육 공약이 함께 다뤄질지, 현장에서는 촉각을 세우고 있습니다.",
+    report: "정개특위 논의가 선거 제도 전반으로 확대될 경우 교육자치, 고교학점제, 지역대학 지원 등 교육 의제도 함께 검토될 수 있습니다.",
+    closing: "EBS 뉴스는 관련 회의 일정과 교육계 반응을 계속 확인하겠습니다.",
+    captionCue: "00:14 / 정개특위 가동…교육 현안 주목",
+    cgCue: "00:32 / 선거 일정·교육 쟁점 타임라인",
+    videoCue: "NPS://RAW/20260708/edu_policy",
+    closingCue: "관련 논의는 다음 회의에서 이어질 전망입니다.",
+    tags: [...story.tags]
+  };
+}
 
 function badge(text, tone = "neutral") {
   return `<span class="badge badge-${tone}">${text}</span>`;
@@ -78,7 +153,7 @@ function statusBadge(value) {
 }
 
 function progress(value, tone = "blue") {
-  return `<div class="progress"><span class="progress-${tone}" style="width:${value}%"></span></div>`;
+  return `<div class="progress progress-${tone}" style="--progress:${value}%"></div>`;
 }
 
 function newsTitle(title) {
@@ -109,6 +184,8 @@ function renderShell() {
       renderShell();
     });
   });
+
+  bindDynamicInteractions();
 }
 
 function getPageMeta() {
@@ -157,6 +234,13 @@ function renderTable(headers, rows, className = "data-table") {
 }
 
 function renderDashboardPage() {
+  const readinessItems = [
+    { label: "원고 승인", value: 91, tone: "green" },
+    { label: "영상 최종본", value: 74, tone: "amber" },
+    { label: "자막/CG", value: 68, tone: "violet" },
+    { label: "송출연계", value: 82, tone: "blue" }
+  ];
+
   return `
     ${renderStatusStrip([
       { label: "작성중", value: "7", progress: 70, tone: "blue" },
@@ -167,7 +251,7 @@ function renderDashboardPage() {
     <section class="dashboard-layout feature-dashboard">
       <article class="panel wire-panel"><div class="panel-heading"><div><h2>연합뉴스 수신 뉴스</h2><p>조건별 조회, 중복 확인, 내부 기사 연결</p></div>${badge("API 정상", "green")}</div><div class="wire-list">${wireItems.map((item) => `<button class="wire-item" type="button"><span class="wire-meta">${item.id} · ${item.received} · ${item.category}</span>${newsTitle(item.title)}<em>${item.status} · ${item.duplicate}</em></button>`).join("")}</div></article>
       <article class="panel"><div class="panel-heading"><div><h2>오늘 제작 현황</h2><p>취재, 기사, 영상, 자막, 송출 단계</p></div>${badge("19:00 회차", "blue")}</div>${renderWorkflowRail()}</article>
-      <article class="panel readiness"><div class="panel-heading"><div><h2>송출 준비 상태</h2><p>큐시트, 프롬프터, 자막/영상 연계 점검</p></div>${badge("3건 확인 필요", "red")}</div><div class="readiness-grid"><div><span>원고 승인</span><strong>91%</strong>${progress(91, "green")}</div><div><span>영상 최종본</span><strong>74%</strong>${progress(74, "amber")}</div><div><span>자막/CG</span><strong>68%</strong>${progress(68, "violet")}</div><div><span>송출연계</span><strong>82%</strong>${progress(82, "blue")}</div></div></article>
+      <article class="panel readiness"><div class="panel-heading"><div><h2>송출 준비 상태</h2><p>큐시트, 프롬프터, 자막/영상 연계 점검</p></div>${badge("3건 확인 필요", "red")}</div><div class="readiness-grid">${readinessItems.map((item) => `<div><span>${item.label}</span><strong>${item.value}%</strong>${progress(item.value, item.tone)}</div>`).join("")}</div></article>
     </section>
     <section class="module-grid">${renderModuleCards()}</section>`;
 }
@@ -203,21 +287,87 @@ function renderPlanningPage() {
 }
 
 function renderEditorPage() {
+  const selectedStory = stories.find((item) => item.id === selectedStoryId) || stories[0];
+  const draft = editorDrafts[selectedStory.id];
+  const relatedWires = wireItems.filter((item) => item.linked === selectedStory.id || item.category === selectedStory.category || item.id === draft.wireId);
+  const visibleWires = relatedWires.length ? relatedWires : wireItems.slice(0, 3);
+  const selectedWire = wireArticleDetails[selectedWireId] ? wireItems.find((item) => item.id === selectedWireId) || visibleWires[0] : visibleWires[0];
+  const wireDetail = wireArticleDetails[selectedWire?.id] || wireArticleDetails[visibleWires[0].id];
   return `
     <section class="editor-workspace" id="editor">
-      <aside class="panel story-list-panel"><div class="panel-heading"><div><h2>기사 목록</h2><p>상태값 기반 승인 흐름</p></div>${badge("5건", "neutral")}</div><div class="story-list">${stories.map((item, i) => `<button class="story-row ${i === 0 ? "selected" : ""}" type="button">${newsTitle(item.title)}<span>${item.reporter} · 마감 ${item.due}</span>${statusBadge(item.status)}</button>`).join("")}</div></aside>
-      <article class="panel script-panel editor-main"><div class="panel-heading"><div><h2>방송 원고 템플릿</h2><p>앵커멘트, 리드, 리포트, 클로징 구조화</p></div>${badge("v4 검토요청", "amber")}</div><div class="story-meta"><label>제목 <input value="${stories[0].title}" /></label><label>담당 <input value="${stories[0].reporter} 기자 / ${stories[0].desk} 데스크" /></label></div><div class="script-toolbar"><button type="button">앵커</button><button type="button">리드</button><button type="button">리포트</button><button type="button">클로징</button><button type="button">자막</button><button type="button">CG</button><button type="button">영상</button></div>${renderScriptBlocks()}<div class="cue-grid"><label>자막 삽입점 <input value="00:14 / 정개특위 가동…교육 현안 주목" /></label><label>CG 삽입점 <input value="00:32 / 선거 일정·교육 쟁점 타임라인" /></label><label>영상 삽입점 <input value="NPS://RAW/20260708/edu_policy" /></label><label>클로징 <input value="관련 논의는 다음 회의에서 이어질 전망입니다." /></label></div></article>
-      <aside class="editor-side"><section class="panel"><div class="panel-heading"><div><h2>버전·승인 이력</h2><p>수정 이력과 승인 추적</p></div></div><ol class="handoff-log">${approvalHistory.map(([time, user, action, note]) => `<li><strong>${time}</strong><span>${user} · ${action}<br>${note}</span></li>`).join("")}</ol></section><section class="panel"><div class="panel-heading"><div><h2>데스크 체크</h2><p>승인 전 필수 확인</p></div></div><ul class="check-list"><li><input type="checkbox" checked /> 출처 및 사용 범위 확인</li><li><input type="checkbox" checked /> 수치·기관명 표현 확인</li><li><input type="checkbox" /> 자막/CG 최종 문구 확인</li><li><input type="checkbox" /> 영상 최종본 버전 확인</li></ul></section><section class="panel"><div class="panel-heading"><div><h2>AI 보조 제안</h2><p>자동 확정 없이 선택 반영</p></div></div><div class="suggestions"><button type="button">앵커멘트 첫 문장을 18자 내외로 줄이면 낭독 호흡이 안정적입니다.</button><button type="button">자막 후보: 정개특위 가동 / 교육 현안 논의 주목</button><button type="button">아카이브 태그: 교육현안, 지방선거, 국회</button></div></section></aside>
+      <aside class="panel story-list-panel"><div class="panel-heading"><div><h2>기사 목록</h2><p>상태값 기반 승인 흐름</p></div>${badge("5건", "neutral")}</div><div class="story-list">${stories.map((item) => `<button class="story-row ${item.id === selectedStory.id ? "selected" : ""}" type="button" data-story-select="${item.id}">${newsTitle(item.title)}<span>${item.reporter} · 마감 ${item.due}</span>${statusBadge(item.status)}</button>`).join("")}</div></aside>
+      <article class="panel script-panel editor-main"><div class="panel-heading"><div><h2>방송 원고 템플릿</h2><p>앵커멘트, 리드, 리포트, 클로징 구조화</p></div>${badge(`${selectedStory.status} · ${draft.wireId || "외부기사 미연결"}`, draft.wireId ? "amber" : "neutral")}</div><div class="story-meta"><label>제목 <input value="${draft.title}" data-field-input="title" /></label><label>담당 <input value="${draft.assignee}" data-field-input="assignee" /></label></div><div class="script-toolbar"><button type="button">앵커</button><button type="button">리드</button><button type="button">리포트</button><button type="button">클로징</button><button type="button">자막</button><button type="button">CG</button><button type="button">영상</button></div>${renderScriptBlocks(draft)}<div class="cue-grid"><label>자막 삽입점 <input value="${draft.captionCue}" data-field-input="captionCue" /></label><label>CG 삽입점 <input value="${draft.cgCue}" data-field-input="cgCue" /></label><label>영상 삽입점 <input value="${draft.videoCue}" data-field-input="videoCue" /></label><label>클로징 <input value="${draft.closingCue}" data-field-input="closingCue" /></label></div><div class="tag-row"><span>기사 태그</span><div class="tag-pills">${draft.tags.map((tag) => `<button type="button" class="tag-pill">${tag}</button>`).join("")}</div></div></article>
+      <aside class="editor-side"><section class="panel wire-assist-panel"><div class="panel-heading"><div><h2>연합뉴스 기사 활용</h2><p>Open API 수신 기사 미리보기와 원고 반영</p></div>${badge("반영 가능", "green")}</div><div class="wire-inline-list">${visibleWires.map((item) => `<button class="wire-item compact ${item.id === selectedWire?.id ? "selected" : ""}" type="button" data-wire-select="${item.id}"><span class="wire-meta">${item.received} · ${item.category} · ${item.id}</span>${newsTitle(item.title)}<em>${item.priority} · ${item.linked === selectedStory.id ? "현재 기사 연결" : item.status}</em></button>`).join("")}</div><div class="wire-preview-card"><span class="preview-label">원문 요약</span><strong>${selectedWire?.title || ""}</strong><p>${wireDetail.summary}</p><div class="wire-preview-meta"><span>${wireDetail.source}</span><span>${wireDetail.updatedAt}</span></div><div class="wire-actions"><button class="ghost-button full" type="button" data-wire-apply="reference">참고 기사로 연결</button><button class="primary-button full" type="button" data-wire-apply="all">제목·본문 반영</button></div><div class="apply-grid"><button type="button" data-wire-apply="title">제목</button><button type="button" data-wire-apply="lead">리드</button><button type="button" data-wire-apply="report">리포트</button><button type="button" data-wire-apply="tags">태그</button></div></div></section><section class="panel"><div class="panel-heading"><div><h2>버전·승인 이력</h2><p>수정 이력과 승인 추적</p></div></div><ol class="handoff-log">${approvalHistory.map(([time, user, action, note]) => `<li><strong>${time}</strong><span>${user} · ${action}<br>${note}</span></li>`).join("")}</ol></section><section class="panel"><div class="panel-heading"><div><h2>데스크 체크</h2><p>승인 전 필수 확인</p></div></div><ul class="check-list"><li><input type="checkbox" checked /> 출처 및 사용 범위 확인</li><li><input type="checkbox" checked /> 수치·기관명 표현 확인</li><li><input type="checkbox" /> 자막/CG 최종 문구 확인</li><li><input type="checkbox" /> 영상 최종본 버전 확인</li></ul></section></aside>
     </section>`;
 }
 
-function renderScriptBlocks() {
+function renderScriptBlocks(draft) {
   return [
-    ["앵커멘트", "지방선거를 앞두고 국회 정치개혁특별위원회가 가동되면서 교육 현안 논의 가능성에도 관심이 쏠립니다."],
-    ["리드", "교육감 선거 제도와 지역 교육 공약이 함께 다뤄질지, 현장에서는 촉각을 세우고 있습니다."],
-    ["리포트", "정개특위 논의가 선거 제도 전반으로 확대될 경우 교육자치, 고교학점제, 지역대학 지원 등 교육 의제도 함께 검토될 수 있습니다."],
-    ["클로징", "EBS 뉴스는 관련 회의 일정과 교육계 반응을 계속 확인하겠습니다."]
-  ].map(([label, text], i) => `<div class="script-block ${i === 0 ? "anchor" : ""}"><span>${label}</span><p contenteditable="true">${text}</p></div>`).join("");
+    ["앵커멘트", "anchor", draft.anchor],
+    ["리드", "lead", draft.lead],
+    ["리포트", "report", draft.report],
+    ["클로징", "closing", draft.closing]
+  ].map(([label, key, text], i) => `<div class="script-block ${i === 0 ? "anchor" : ""}"><span>${label}</span><p contenteditable="true" data-script-field="${key}">${text}</p></div>`).join("");
+}
+
+function bindDynamicInteractions() {
+  document.querySelectorAll("[data-story-select]").forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedStoryId = button.dataset.storySelect;
+      const linkedWire = editorDrafts[selectedStoryId]?.wireId;
+      if (linkedWire && wireArticleDetails[linkedWire]) selectedWireId = linkedWire;
+      renderShell();
+    });
+  });
+
+  document.querySelectorAll("[data-wire-select]").forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedWireId = button.dataset.wireSelect;
+      renderShell();
+    });
+  });
+
+  document.querySelectorAll("[data-wire-apply]").forEach((button) => {
+    button.addEventListener("click", () => {
+      applyWireToDraft(button.dataset.wireApply);
+      renderShell();
+    });
+  });
+
+  document.querySelectorAll("[data-field-input]").forEach((input) => {
+    input.addEventListener("input", () => {
+      editorDrafts[selectedStoryId][input.dataset.fieldInput] = input.value;
+    });
+  });
+
+  document.querySelectorAll("[data-script-field]").forEach((block) => {
+    block.addEventListener("input", () => {
+      editorDrafts[selectedStoryId][block.dataset.scriptField] = block.textContent.trim();
+    });
+  });
+}
+
+function applyWireToDraft(mode) {
+  const detail = wireArticleDetails[selectedWireId];
+  if (!detail) return;
+  const draft = editorDrafts[selectedStoryId];
+  if (mode === "reference" || mode === "all") {
+    draft.wireId = selectedWireId;
+  }
+  if (mode === "title" || mode === "all") {
+    draft.title = detail.summary.length > 46 ? detail.summary.slice(0, 46).trimEnd() + "…" : detail.summary;
+  }
+  if (mode === "lead" || mode === "all") {
+    draft.lead = detail.lead;
+    draft.anchor = detail.lead;
+  }
+  if (mode === "report" || mode === "all") {
+    draft.report = detail.body.join(" ");
+    draft.closing = `${detail.reporter} 취재 내용을 바탕으로 추가 확인을 이어가겠습니다.`;
+  }
+  if (mode === "tags" || mode === "all") {
+    draft.tags = [...detail.tags];
+  }
 }
 
 function renderGraphicsPage() {

@@ -228,23 +228,26 @@ h2 {
 }
 
 .progress {
+  position: relative;
   height: 7px;
   overflow: hidden;
   border-radius: 999px;
   background: #e2e7ee;
 }
 
-.progress span {
+.progress::after {
+  content: "";
   display: block;
+  width: var(--progress, 0%);
   height: 100%;
   border-radius: inherit;
-  background: var(--blue);
+  background: var(--progress-color, var(--blue));
 }
 
-.progress-green { background: var(--green) !important; }
-.progress-amber { background: var(--amber) !important; }
-.progress-violet { background: var(--violet) !important; }
-.progress-blue { background: var(--blue) !important; }
+.progress-green { --progress-color: var(--green); }
+.progress-amber { --progress-color: var(--amber); }
+.progress-violet { --progress-color: var(--violet); }
+.progress-blue { --progress-color: var(--blue); }
 
 .dashboard-layout {
   display: grid;
@@ -1020,6 +1023,10 @@ h2 {
   background: #e8edf4;
 }
 
+.progress::after {
+  min-width: 10px;
+}
+
 .badge {
   min-height: 24px;
   border-radius: 6px;
@@ -1465,3 +1472,91 @@ input:not([type]):focus {
   }
 }
 
+
+
+.wire-assist-panel,
+.wire-inline-list {
+  display: grid;
+  gap: 10px;
+}
+
+.wire-item.compact {
+  min-height: auto;
+  padding: 12px;
+}
+
+.wire-item.selected,
+.apply-grid button:hover,
+.tag-pill:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.wire-preview-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.preview-label,
+.tag-row span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.wire-preview-card strong {
+  line-height: 1.4;
+}
+
+.wire-preview-card p {
+  margin-bottom: 0;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.wire-preview-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.wire-actions,
+.apply-grid,
+.tag-pills,
+.tag-row {
+  display: grid;
+  gap: 8px;
+}
+
+.apply-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.apply-grid button,
+.tag-pill {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--navy-800);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tag-row {
+  margin-top: 14px;
+}
+
+.tag-pills {
+  grid-template-columns: repeat(auto-fit, minmax(88px, max-content));
+}
+
+.tag-pill {
+  padding: 0 12px;
+}
